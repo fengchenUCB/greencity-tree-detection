@@ -72,7 +72,7 @@ def main():
 
     callbacks = []
 
-    weights_path = os.path.join(args.log, 'weights.best.h5')
+    weights_path = os.path.join(args.log, 'weights.best.weights.h5')
     callbacks.append(ModelCheckpoint(
             filepath=weights_path,
             monitor='val_loss',
@@ -80,7 +80,7 @@ def main():
             save_best_only=True,
             save_weights_only=True,
             ))
-    weights_path = os.path.join(args.log, 'weights.latest.h5')
+    weights_path = os.path.join(args.log, 'weights.latest.weights.h5')
     callbacks.append(ModelCheckpoint(
             filepath=weights_path,
             monitor='val_loss',
@@ -103,7 +103,8 @@ def main():
             steps_per_epoch=len(f['train/images'])//args.batch_size+1,
             verbose=True,
             callbacks=callbacks,
-            use_multiprocessing=True)
+            #use_multiprocessing=True
+    )
 
 if __name__ == '__main__':
     main()

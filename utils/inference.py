@@ -104,4 +104,3 @@ def run_tiled_inference(model,input_path,output_path,min_distance,threshold_abs,
     gdf.to_file(output_path,driver='GeoJSON')
 
     os.remove(temp_path)
-
