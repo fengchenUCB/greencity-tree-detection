@@ -2,11 +2,11 @@
 
 for k in {1..2}; do
 
-#cd /workspace/data
+cd /workspace/greencity-tree-detection
 
 rm -rf ./pasadena_tiles_2048_32_finetuned${k}
 mkdir ./pasadena_tiles_2048_32_finetuned${k}
-cp ./pasadena_tiles_2048_32_finetuned_demo/* ./pasadena_tiles_2048_32_finetuned${k}/
+cp ./pasadena_tiles_2048_32_finetuned-demo/* ./pasadena_tiles_2048_32_finetuned${k}/
 
 rm -rf ./pasadena_train${k}_weights
 mkdir ./pasadena_train${k}_weights
@@ -16,8 +16,7 @@ rm -rf ./pasadena_train_hdf5/dataset${k}.h5
 cd ./pasadena_data_256_RGB_train_backup/
 python dataset_preprocess.py --seed_m {k} --threshold 55
 
-#cd /workspace/data
-#python3 -m scripts.prepare <path to dataset> <path to hdf5 file> --bands <RGB or RGBN>
+cd /workspace/greencity-tree-detection
 python -m scripts.prepare ./pasadena_data_256_RGB_train_backup ./pasadena_train_hdf5/dataset${k}.h5 --bands RGB
 
 # Train
@@ -34,6 +33,6 @@ python -m scripts.test ./pasadena_train_hdf5/dataset${k}.h5 ./pasadena_train${k}
 
 # Evaluation
 cd ./pasadena_tiles_2048_32_finetuned${k}; sh merge_GeoJSON.sh; python evaluation-NEW-2.py
-#cd /workspace/data
+cd /workspace/greencity-tree-detection
 
 done
